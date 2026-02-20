@@ -1,5 +1,5 @@
 {
-  "name": "webpacktemplate",
+  "name": "odin-todolist",
   "version": "1.0.0",
   "type": "module",
   "main": "script.js",
