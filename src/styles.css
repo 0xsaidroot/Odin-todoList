@@ -3,3 +3,24 @@
     margin: 0;
     box-sizing: border-box;
 }  
+/* body{
+    height: 100vh;
+    display: grid;
+    grid-template-columns: min(30%,300px)  1fr;
+    grid-template-rows: 20% 1fr;
+
+}
+header{
+    background-color: aqua;
+    grid-column: 2/3;
+}
+aside{
+    background-color: blue;
+    grid-row: 1/3;
+
+}
+main{
+    background-color: coral;
+    grid-column: 2/3;
+    grid-row: 2/3;
+} */

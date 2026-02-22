@@ -3,16 +3,15 @@ export class Project {
         this.name = name;
         this.todoArray = [];
     }
-    get name(){
-        return this.name
-    }
-    set name(name){
-        this.name = name;
-    }
+}
+export function saveProject(projectObj, projectArray) {
+    let projectId = self.crypto.randomUUID();
+    projectObj.id = projectId;
+    projectArray.push(projectObj);
+}
+export function deleteProject(projectObj, projectArray) {
+    let projectItem = projectArray.findIndex(item => item.id === projectObj.id );
+    projectArray.splice(projectItem, 1);
 
 }
-export function deleteProject(projectObj) {
-    Object.keys(projectObj).forEach(key => {
-       projectObj[key] = null;
-    });
-}
+
