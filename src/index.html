@@ -1,13 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Odin-todoList</title>
-</head>
-<body>
-    <header id="header" >Header</header>
-    <aside id="aside" ></aside>
-    <main id="main" >Main</main>
-</body>
+  </head>
+  <body>
+    <header id="header">Header</header>
+    <aside id="aside">
+        <p>Bomm iojijughgysyibsyibszbuszubzsubzsuib</p>
+      <button style="margin: 5px" id="openDialog">Add Project</button> 
+        
+        <dialog closedby="closerequest">
+          <form method="dialog">
+            <p>
+              <label for="title">Name :</label
+              ><input type="text" name="project_name" id="projectName" required />
+            </p>
+            <div class="lower-btn">
+              <button type="button" id="cancelBtn">Cancel</button>
+              <button type="submit" id="addBtn">Add</button>
+            </div>
+          </form>
+      </dialog> 
+
+    </aside>
+    <main id="main">Main</main>
+  </body>
 </html>
