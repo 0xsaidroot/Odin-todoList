@@ -3,7 +3,7 @@
     margin: 0;
     box-sizing: border-box;
 }  
-/* body{
+body{
     height: 100vh;
     display: grid;
     grid-template-columns: min(30%,300px)  1fr;
@@ -23,4 +23,4 @@ main{
     background-color: coral;
     grid-column: 2/3;
     grid-row: 2/3;
-} */
+} 
