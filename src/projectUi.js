@@ -1,36 +1,48 @@
 import { Project, saveProject, deleteProject } from "./project.js";
 
-const projectList = document.createElement('ul');
 const todoList = document.createElement('ul');
 
-export function displayProjects(aside,projects) {
+export function displayProjects(ul,aside, projects) {
+
+    ul.innerHTML = '';
+
+
     for (const project of projects) {
         const projectItem = document.createElement('li');
-        projectItem.id = project.id;
-        projectItem.textContent = project.name;
-        projectList.append(projectItem);
-    }
-    aside.replaceChildren();
-    aside.append(projectList);
-}
+        const clearItem = document.createElement('button');
+        const editItem = document.createElement('button');
 
-export function displayTodos(aside,main,projects){
+        projectItem.id = project.id;
+        
+        editItem.textContent="Edit";
+        editItem.className = 'editBtn';
+        clearItem.textContent = 'Clear';
+        clearItem.className = 'clearBtn';
+        projectItem.textContent = project.name;
+
+        projectItem.append(editItem,clearItem);
+        ul.append(projectItem);
+    }
+    aside.append(ul);
+}
+export function displayTodos(aside, main, projects) {
 
     aside.addEventListener('click', function (event) {
-    let target = event.target.id;
-    let projectItem = projects.find(item => item.id === target);
+        let target = event.target.id;
+        let projectItem = projects.find(item => item.id === target);
 
-    if(!projectItem) return; 
-    console.log(projectItem);
+        if (!projectItem) return;
+        console.log(projectItem);
 
-    todoList.replaceChildren();
+        todoList.replaceChildren();
 
-    for (const todo of projectItem.todoArray) {
-        const todoItem = document.createElement('li');
-        todoItem.textContent = todo.title;
-        todoList.append(todoItem);
-    }
-    
-    main.append(todoList);
-})
+        for (const todo of projectItem.todoArray) {
+            const todoItem = document.createElement('li');
+            todoItem.textContent = todo.title;
+            todoList.append(todoItem);
+        }
+
+        main.append(todoList);
+    })
 }
+

@@ -11,6 +11,8 @@ export function saveProject(projectObj, projectArray) {
 }
 export function deleteProject(projectObj, projectArray) {
     let projectItem = projectArray.findIndex(item => item.id === projectObj.id );
+    if(!projectItem) return;
+    
     projectArray.splice(projectItem, 1);
 
 }
