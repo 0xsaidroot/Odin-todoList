@@ -16,4 +16,3 @@ export function deleteProject(projectObj, projectArray) {
     projectArray.splice(projectItem, 1);
 
 }
-

@@ -8,23 +8,48 @@
   <body>
     <header id="header">Header</header>
     <aside id="aside">
-      <button style="margin: 5px" id="openDialog">Add Project</button> 
+      <button style="margin: 5px" id="openDialog">Add Project</button>
       <ul id="projectList"></ul>
-        
-        <dialog closedby="closerequest">
-          <form method="dialog">
-            <p>
-              <label for="title">Name :</label
-              ><input type="text" name="project_name" id="projectName" required />
-            </p>
-            <div class="lower-btn">
-              <button type="button" id="cancelBtn">Cancel</button>
-              <button type="submit" id="addBtn">Add</button>
-            </div>
-          </form>
-      </dialog> 
 
+      <dialog closedby="closerequest" id="addDialogBox">
+        <form method="dialog">
+          <p>
+            <label for="title">Name :</label
+            ><input type="text" id="projectName" />
+          </p>
+          <div class="lower-btn">
+            <button type="button" class="cancelBtn">Cancel</button>
+            <button type="submit" id="addBtn">Add</button>
+          </div>
+        </form>
+      </dialog>
+
+      <dialog closedby="closerequest" id="editDialogBox">
+        <form method="dialog">
+          <p>
+            <label for="title">Name :</label
+            ><input type="text" id="projectNameEdit" />
+          </p>
+          <button type="button" class="cancelBtn">Cancel</button>
+          <button type="submit" id="editBtnDialog">Edit</button>
+        </form>
+      </dialog>
     </aside>
-    <main id="main">Main</main>
+    <main id="main"> 
+      <button id="addingTaskBtn">Add Task</button>
+      <dialog closedby="closerequest" id="TodoDialog">
+        <form method="dialog">
+          <p>
+            <label for="title">Name :</label
+            ><input type="text" id="todoName" />
+          </p>
+          <div class="lower-btn">
+            <button type="button" class="cancelBtn">Cancel</button>
+            <button type="submit" id="addTodoBtn">Add</button>
+          </div>
+        </form>
+      </dialog>
+
+    </main>
   </body>
 </html>

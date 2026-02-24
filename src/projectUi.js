@@ -2,6 +2,8 @@ import { Project, saveProject, deleteProject } from "./project.js";
 
 const todoList = document.createElement('ul');
 
+export let selectedProject = null;
+
 export function displayProjects(ul,aside, projects) {
 
     ul.innerHTML = '';
@@ -30,6 +32,8 @@ export function displayTodos(aside, main, projects) {
     aside.addEventListener('click', function (event) {
         let target = event.target.id;
         let projectItem = projects.find(item => item.id === target);
+
+        selectedProject = projectItem ?? null ; 
 
         if (!projectItem) return;
         console.log(projectItem);
