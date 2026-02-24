@@ -1,10 +1,9 @@
 import "./styles.css";
 import { Todo, saveTodoToProject, deleteTodoFromProject } from './todos.js';
 import { Project, saveProject, deleteProject } from "./project.js";
-import { displayProjects, displayTodos } from "./projectUi.js";
-import { selectedProject } from "./projectUi.js";
+import { addNewProject, displayProjects, displayTodos, editAndClearProject, selectedProject,todoList } from "./projectUi.js"
 
-const projects = [];
+export const projects = [];
 let project1 = new Project();
 let project2 = new Project("Home")
 let task = [];
@@ -20,120 +19,56 @@ saveProject(project2, projects);
 console.log({ projects })
 
 
-const aside = document.querySelector('aside');
-const main = document.querySelector('main');
 
-const addDialog = document.querySelector('#addDialogBox');
-const editDialog = document.querySelector('#editDialogBox');
+export const main = document.querySelector('main');
 
 const todoDialog = document.querySelector('#TodoDialog');
+const todoNameInput = document.querySelector('#todoName');
+const addTodoToProject = document.querySelector('#addTaskBtn')
 
-const projectList = document.querySelector('#projectList')
+let choosedProject = null;
 
-const todoName = document.querySelector('#todoName');
-const addTodoBtnDialog = document.querySelector('#addTodoBtn');
-const addTodoToProject = document.querySelector('#addingTaskBtn')
+export const openDialog = (dialog) => dialog.showModal();
+export const closeDialog = (dialog) => dialog.close();
 
-const newProjectName = document.querySelector('#projectName');
-const editProjectName = document.querySelector('#projectNameEdit');
-
-displayProjects(projectList, aside, projects);
-displayTodos(aside, main, projects);
-
-//Opening and closure of new Project Dialog box
-const showAddDialog = (show) =>
-    show ? addDialog.showModal() : addDialog.close();
-
-const showEditDialog = (show) =>
-    show ? editDialog.showModal() : editDialog.close();
-
-const showTodoDialog = (show) =>
-    show ? todoDialog.showModal() : todoDialog.close();
-
-aside.addEventListener('click', (event) => {
-    let target = event.target;
-
-    if (target.id === 'openDialog') {
-        showAddDialog(true);
-    } else return;
-
-})
-//Adding new project to UI logic to be moved 
-addDialog.addEventListener('click', function (event) {
-    let target = event.target;
-
-    if (target.className === "cancelBtn") showAddDialog(false);
-    else if (target.id === "addBtn") {
-        const newProject = new Project(newProjectName.value);
-        newProjectName.value = '';
-
-        showAddDialog(false);
-        saveProject(newProject, projects);
-        displayProjects(projectList, aside, projects);
-    }
-    else return;
-})
-// Editing existing projectName
-editDialog.addEventListener('click', function (event) {
-    let target = event.target;
-
-    if (target.className === "cancelBtn") showEditDialog(false);
-    else if (target.id === "editBtnDialog") {
-        const editingItem = projects.find(item => item.id === editDialog.dataset.editingId);
-        if (!editingItem) return;
-        console.log(editingItem);
-
-        editingItem.name = editProjectName.value;
-
-        showEditDialog(false);
-
-        displayProjects(projectList, aside, projects);
-        editProjectName.value = '';
-
-        console.log({editingItem});
-
-
-    }
-    else return;
-})
-
-//clear and editing projects containerLogic
-projectList.addEventListener('click', (event) => {
-    let target = event.target;
-
-    if (target.className === 'editBtn') {
-
-        let item = target.closest("li");
-        if (!item) return;
-        let projectItem = projects.find(obj => obj.id === item.id);
-        if (!projectItem) return;
-
-        console.log(projectItem);
-
-        showEditDialog(true);
-
-        editDialog.dataset.editingId = projectItem.id;
-        editProjectName.value = projectItem.name;
-
-
-    } else if (target.className === 'clearBtn') {
-        let item = target.closest("li");
-        if (!item) return;
-        deleteProject(item, projects);
-        console.log(projects);
-        displayProjects(projectList, aside, projects);
-
-    } else return;
-})
+displayProjects(projects);
+displayTodos(projects);
+addNewProject();
+editAndClearProject();
 
 // Add todo to project
-main.addEventListener('click',(event)=>{
-     let target = event.target;
+addTodoToProject.addEventListener('click', () => {
 
-     if(target.id === "addingTaskBtn"){
-        showTodoDialog(true);
-        console.log(selectedProject);
-     }
+    choosedProject = selectedProject;
 
-    else return
+    if (!choosedProject) choosedProject = projects[0];
+
+    console.log(choosedProject);
+    openDialog(todoDialog);
+})
+todoDialog.addEventListener('click', function (event) {
+    let target = event.target;
+
+    if (target.className === "cancelBtn") closeDialog(todoDialog);
+    else if (target.id === "addTodoBtn") {
+        const todoName = todoNameInput.value;
+        const todo = new Todo(todoName, '', '', '');
+        closeDialog(todoDialog);
+        todoNameInput.value = "";
+        let projectItem = projects.find(item => item.id === choosedProject.id);
+        saveTodoToProject(todo, projectItem);
+
+        todoList.replaceChildren();
+
+        for (const todo of projectItem.todoArray) {
+            const todoItem = document.createElement('li');
+            todoItem.textContent = todo.title;
+            todoList.append(todoItem);
+        }
+
+        main.append(todoList);
+
+
+    }
+    else return;
 })

@@ -8,14 +8,16 @@
   <body>
     <header id="header">Header</header>
     <aside id="aside">
-      <button style="margin: 5px" id="openDialog">Add Project</button>
+      
+      <button style="margin: 5px" id="newProjectBtn">Add Project</button>
+
       <ul id="projectList"></ul>
 
-      <dialog closedby="closerequest" id="addDialogBox">
+      <dialog closedby="closerequest" id="newProjectDialogBox">
         <form method="dialog">
           <p>
             <label for="title">Name :</label
-            ><input type="text" id="projectName" />
+            ><input type="text" id="newProjectName" />
           </p>
           <div class="lower-btn">
             <button type="button" class="cancelBtn">Cancel</button>
@@ -24,29 +26,29 @@
         </form>
       </dialog>
 
-      <dialog closedby="closerequest" id="editDialogBox">
+      <dialog closedby="closerequest" id="editProjectDialogBox">
         <form method="dialog">
           <p>
             <label for="title">Name :</label
             ><input type="text" id="projectNameEdit" />
           </p>
           <button type="button" class="cancelBtn">Cancel</button>
-          <button type="submit" id="editBtnDialog">Edit</button>
+          <button type="submit" id="editBtn">Edit</button>
         </form>
       </dialog>
     </aside>
     <main id="main"> 
-      <button id="addingTaskBtn">Add Task</button>
+
+      <button id="addTaskBtn">Add Task</button>
+
       <dialog closedby="closerequest" id="TodoDialog">
         <form method="dialog">
           <p>
             <label for="title">Name :</label
             ><input type="text" id="todoName" />
           </p>
-          <div class="lower-btn">
             <button type="button" class="cancelBtn">Cancel</button>
             <button type="submit" id="addTodoBtn">Add</button>
-          </div>
         </form>
       </dialog>
 
