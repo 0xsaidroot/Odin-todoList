@@ -1,5 +1,7 @@
 import { Project, saveProject, deleteProject } from "./project.js";
-import { openDialog, closeDialog, projects, main } from "./script.js";
+import { openDialog, closeDialog, projects } from "./script.js";
+import { displayTodos } from "./todoUi.js";
+
 
 export const todoList = document.createElement('ul');
 
@@ -38,7 +40,7 @@ export function displayProjects(projects) {
     }
     aside.append(projectList);
 }
-export function displayTodos(projects) {
+export function displayTodosOnClick(projects) {
 
     aside.addEventListener('click', function (event) {
         let target = event.target.id;
@@ -47,16 +49,9 @@ export function displayTodos(projects) {
         selectedProject = projectItem;
 
         if (!projectItem) return;
-        
+
         todoList.replaceChildren();
-
-        for (const todo of projectItem.todoArray) {
-            const todoItem = document.createElement('li');
-            todoItem.textContent = todo.title;
-            todoList.append(todoItem);
-        }
-
-        main.append(todoList);
+        displayTodos(projectItem);
     })
 }
 export function openNewProjectDialog() {
@@ -136,4 +131,3 @@ export function editAndClearProject() {
         else return;
     })
 }
-

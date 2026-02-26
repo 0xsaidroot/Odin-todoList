@@ -8,7 +8,6 @@
   <body>
     <header id="header">Header</header>
     <aside id="aside">
-      
       <button style="margin: 5px" id="newProjectBtn">Add Project</button>
 
       <ul id="projectList"></ul>
@@ -37,21 +36,28 @@
         </form>
       </dialog>
     </aside>
-    <main id="main"> 
-
+    <main id="main">
       <button id="addTaskBtn">Add Task</button>
 
       <dialog closedby="closerequest" id="TodoDialog">
         <form method="dialog">
           <p>
-            <label for="title">Name :</label
-            ><input type="text" id="todoName" />
+            <label for="title">Name :</label><input type="text" id="todoName" />
           </p>
-            <button type="button" class="cancelBtn">Cancel</button>
-            <button type="submit" id="addTodoBtn">Add</button>
+          <button type="button" class="cancelBtn">Cancel</button>
+          <button type="submit" id="addTodoBtn">Add</button>
         </form>
       </dialog>
 
+      <dialog closedby="closerequest" id="TodoEditDialog">
+        <form method="dialog">
+          <p>
+            <label for="title">Name :</label><input type="text" id="todoNameEditInput" />
+          </p>
+          <button type="button" class="cancelBtn">Cancel</button>
+          <button type="submit" id="todoEditBtn">Edit</button>
+        </form>
+      </dialog>
     </main>
   </body>
 </html>
