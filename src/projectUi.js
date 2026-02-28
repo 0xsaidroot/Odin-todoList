@@ -1,5 +1,5 @@
 import { Project, saveProject, deleteProject } from "./project.js";
-import { openDialog, closeDialog, projects } from "./script.js";
+import { openDialog, closeDialog, projects, saveProjects } from "./script.js";
 import { displayTodos } from "./todoUi.js";
 
 
@@ -19,7 +19,7 @@ const aside = document.querySelector('aside');
 
 export function displayProjects(projects) {
 
-    projectList.innerHTML = '';
+    projectList.replaceChildren();
 
 
     for (const project of projects) {
@@ -78,6 +78,7 @@ export function addNewProject() {
             openDialog(newProjectDialog);
             saveProject(newProject, projects);
             displayProjects(projects);
+            saveProjects();
         }
         else return;
     })
@@ -104,10 +105,11 @@ export function editAndClearProject() {
         } else if (target.className === 'clearBtn') {
             let item = target.closest("li");
             if (!item) return;
-            deleteProject(item, projects);
-            console.log(projects);
+            const projectItem = projects.find(obj => obj.id === item.id);
+            if (!projectItem) return;
+            deleteProject(projectItem, projects);
             displayProjects(projects);
-
+            saveProjects();
         } else return;
     })
     editProjectDialog.addEventListener('click', function (event) {
@@ -124,6 +126,7 @@ export function editAndClearProject() {
             closeDialog(editProjectDialog);
 
             displayProjects(projects);
+            saveProjects();
             editProjectName.value = '';
 
             console.log({ editingItem });

@@ -1,30 +1,56 @@
 import "./styles.css";
-import { Todo, saveTodoToProject,  } from './todos.js';
+import { Todo } from './todos.js';
 import { Project, saveProject } from "./project.js";
 import { addNewProject, displayProjects, displayTodosOnClick, editAndClearProject } from "./projectUi.js"
-import { addTodoToProject,editAndClearTodos } from "./todoUi.js";
+import { addTodoToProject, editAndClearTodos } from "./todoUi.js";
 
 
 
 export const projects = [];
-let project1 = new Project();
-let project2 = new Project("Home")
-let task = [];
 
-for (let i = 1; i <= 5; i++) {
-    task[i] = new Todo(`Programming ${i}`, "A short or long desc", '11/22/26', 'Very High');
-    saveTodoToProject(task[i], project1);
-    saveTodoToProject(task[i], project2);
+export function saveProjects() {
+    localStorage.setItem('projects', JSON.stringify(projects));
 }
 
-saveProject(project1, projects);
-saveProject(project2, projects);
-console.log({ projects })
+export function loadProjects() {
+    const data = localStorage.getItem('projects');
+    if (!data) {
+        console.log('no saved projects in localStorage');
+        return;
+    }
 
+    let raw;
+    try {
+        raw = JSON.parse(data);
+    } catch (e) {
+        console.error('Failed to parse projects from storage', e);
+        return;
+    }
+    raw.forEach(p => {
+        const proj = new Project(p.name);
+        proj.id = p.id;
+        proj.todoArray = (p.todoArray || []).map(t => {
+            const todo = new Todo(t.title, '', '', '');
+            todo.id = t.id;
+            return todo;
+        });
+        projects.push(proj);
+    });
+
+
+}
 
 export const main = document.querySelector('main');
 export const openDialog = (dialog) => dialog.showModal();
 export const closeDialog = (dialog) => dialog.close();
+
+
+
+
+
+
+
+loadProjects();
 
 displayProjects(projects);
 displayTodosOnClick(projects);
@@ -32,3 +58,5 @@ addNewProject();
 editAndClearProject();
 addTodoToProject();
 editAndClearTodos();
+
+

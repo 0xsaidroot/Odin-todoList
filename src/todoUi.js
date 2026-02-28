@@ -1,6 +1,6 @@
-import { Todo,saveTodoToProject } from "./todos.js";
-import { selectedProject,todoList } from "./projectUi.js";
-import { projects,openDialog,closeDialog,main } from "./script.js";
+import { Todo, saveTodoToProject, deleteTodoFromProject } from "./todos.js";
+import { selectedProject, todoList } from "./projectUi.js";
+import { projects, openDialog, closeDialog, main, saveProjects } from "./script.js";
 
 
 export const todoDialog = document.querySelector('#TodoDialog');
@@ -35,6 +35,7 @@ todoDialog.addEventListener('click', function (event) {
         let projectItem = projects.find(item => item.id === choosedProject.id);
         saveTodoToProject(todo, projectItem);
         displayTodos(projectItem);
+        saveProjects();
 
     }
     else return;
@@ -65,15 +66,14 @@ export function editAndClearTodos(){
     let target = event.target;
     if (target.className === 'clearBtn') {
         let Item = target.closest('li');
+        if (!Item) return;
 
-        console.log(Item);
-        console.log(selectedProject);
-
-        deleteTodoFromProject(Item, selectedProject);
-
-        console.log(selectedProject);
-
-        displayTodos(selectedProject);
+        const todoObj = selectedProject.todoArray.find(t => t.id === Item.id);
+        if (todoObj) {
+            deleteTodoFromProject(todoObj, selectedProject);
+            displayTodos(selectedProject);
+            saveProjects();
+        }
     } else if (target.className === "editBtn") {
         let item = target.closest("li");
         if (!item) return;
@@ -109,6 +109,7 @@ todoEditDialog.addEventListener('click', function (event) {
         closeDialog(todoEditDialog);
 
         displayTodos(selectedProject);
+        saveProjects();
         todoEditNameInput.value = '';
 
         console.log({ todoItem});
