@@ -1,6 +1,6 @@
 import "./styles.css";
 import { Todo } from './todos.js';
-import { Project, saveProject } from "./project.js";
+import { Project } from "./project.js";
 import { addNewProject, displayProjects, displayTodosOnClick, editAndClearProject } from "./projectUi.js"
 import { addTodoToProject, editAndClearTodos } from "./todoUi.js";
 
@@ -11,33 +11,29 @@ export const projects = [];
 export function saveProjects() {
     localStorage.setItem('projects', JSON.stringify(projects));
 }
-
 export function loadProjects() {
-    const data = localStorage.getItem('projects');
+    let data = localStorage.getItem("projects");
     if (!data) {
-        console.log('no saved projects in localStorage');
-        return;
+        console.log('no saved projects in localStorage')
+        return
     }
-
     let raw;
-    try {
+    try{
         raw = JSON.parse(data);
-    } catch (e) {
-        console.error('Failed to parse projects from storage', e);
-        return;
+    }catch(e){
+        console.error('Failed to parse projects from storage',e);
+        return
     }
-    raw.forEach(p => {
-        const proj = new Project(p.name);
-        proj.id = p.id;
-        proj.todoArray = (p.todoArray || []).map(t => {
-            const todo = new Todo(t.title, '', '', '');
-            todo.id = t.id;
-            return todo;
-        });
+    raw.array.forEach(element => {
+        let proj = new Project(element.name);
+        proj.id = element.id;
+        proj.todoArray = (element.todoArray || []).map(t =>{
+            const task = new Todo(t.title,'','','');
+            task.id =t.id;
+            return task;
+        })
         projects.push(proj);
     });
-
-
 }
 
 export const main = document.querySelector('main');
