@@ -13,7 +13,7 @@ const projectList = document.querySelector('#projectList')
 const newProjectName = document.querySelector('#newProjectName');
 const editProjectName = document.querySelector('#projectNameEdit');
 
-const aside = document.querySelector('aside');
+const aside = document.querySelector('#projectContainer');
 
 
 

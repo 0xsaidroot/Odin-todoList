@@ -8,16 +8,15 @@
   <body>
     <aside id="aside">
            <h1 id="head">Projects</h1>
-
-  
-      <ul id="projectList">
-        
-      </ul>
+      <div id="projectContainer">
+        <ul id="projectList"></ul>
+        <button id="newProjectBtn">new Project</button>
+      </div>
 
       <dialog closedby="closerequest" id="newProjectDialogBox">
         <form method="dialog">
           <p>
-            <label for="title">Name :</label
+            <label for="newProjectName">Name :</label
             ><input type="text" id="newProjectName" />
           </p>
           <div class="lower-btn">
@@ -30,7 +29,7 @@
       <dialog closedby="closerequest" id="editProjectDialogBox">
         <form method="dialog">
           <p>
-            <label for="title">Name :</label
+            <label for="projectNameEdit">Name :</label
             ><input type="text" id="projectNameEdit" />
           </p>
           <button type="button" class="cancelBtn">Cancel</button>
