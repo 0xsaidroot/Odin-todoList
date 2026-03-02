@@ -13,7 +13,7 @@ const projectList = document.querySelector('#projectList')
 const newProjectName = document.querySelector('#newProjectName');
 const newProjectDesc = document.querySelector('#desc');
 const editProjectName = document.querySelector('#projectNameEdit');
-
+const editProjectDesc = document.querySelector('#descEdit');
 const aside = document.querySelector('#projectContainer');
 
 
@@ -71,7 +71,10 @@ export function addNewProject() {
     newProjectDialog.addEventListener('click', function (event) {
         let target = event.target;
 
-        if (target.className === "cancelBtn") closeDialog(newProjectDialog);
+        if (target.className === "cancelBtn"){ closeDialog(newProjectDialog);
+            newProjectName.value = '';
+            newProjectDesc.value = '';
+        }
         else if (target.id === "addBtn") {
             const newProject = new Project(newProjectName.value);
             newProject.desc = newProjectDesc.value;
@@ -104,6 +107,7 @@ export function editAndClearProject() {
 
             editProjectDialog.dataset.editingId = projectItem.id;
             editProjectName.value = projectItem.name;
+            editProjectDesc.value = projectItem.desc;
 
 
         } else if (target.className === 'clearBtn') {
@@ -114,6 +118,8 @@ export function editAndClearProject() {
             deleteProject(projectItem, projects);
             displayProjects(projects);
             saveProjects();
+            editProjectName.value = '';
+            editProjectDesc.value = '';
         } else return;
     })
     editProjectDialog.addEventListener('click', function (event) {
@@ -126,6 +132,7 @@ export function editAndClearProject() {
             console.log(editingItem);
 
             editingItem.name = editProjectName.value;
+            editingItem.desc = editProjectDesc.value;
 
             closeDialog(editProjectDialog);
 

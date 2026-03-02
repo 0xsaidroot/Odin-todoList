@@ -12,7 +12,7 @@
     <h1 id="head">Projects</h1>
     <div id="projectContainer">
       <ul id="projectList"></ul>
-      <button id="newProjectBtn">new Project</button>
+      <button id="newProjectBtn">+ Project</button>
     </div>
 
     <dialog closedby="closerequest" id="newProjectDialogBox">
@@ -23,7 +23,7 @@
         </p>
         <div>
           <label for="desc">Project Description :</label> <br>
-          <textarea id="desc" rows="10" style="width: 100%; resize: none;"></textarea>
+          <textarea id="desc" rows="10" style="width: 100%; resize: none;" placeholder="my Awesome Project..."></textarea>
         </div>
         <div class="lower-proj">
           <div class="lower">
@@ -59,9 +59,24 @@
       <form method="dialog">
         <h1>New Task</h1>
         <p>
-          <label for="title">Name :</label><input type="text" id="todoName" />
+          <label for="todoName">Name :</label><input type="text" id="todoName" />
         </p>
-        <div class="lower">
+        <div>
+          <label for="todoDesc">Desc :</label> <textarea id="todoDesc" rows="5" style="width: 100%; resize: none;"
+            placeholder="Tasking..."></textarea>
+        </div>
+        <p>
+          <label for="todoDate">dueDate :</label><input type="date" id="todoDate">
+        </p>
+        <div class="priorityDiv"> 
+          <p>Priority :</p>
+          <div class="priorityRadios">
+          <input type="radio" name="Priority" id="prior1" value="Low"><label for="prior1">Low</label>
+          <input type="radio" name="Priority" id="prior2" value="Medium"><label for="prior2">Medium</label>
+          <input type="radio" name="Priority" id="prior3" value="High"><label for="prior3">High</label>
+          </div>
+        </div>
+        <div class="lower-proj">
           <button type="button" class="cancelBtn">Cancel</button>
           <button type="submit" id="addTodoBtn">Add</button>
         </div>
@@ -74,7 +89,7 @@
         <p>
           <label for="title">Name :</label><input type="text" id="todoNameEditInput" />
         </p>
-        <div class="lower"><button type="button" class="cancelBtn">Cancel</button>
+        <div class="lower-proj"><button type="button" class="cancelBtn">Cancel</button>
           <button type="submit" id="todoEditBtn">Edit</button>
         </div>
       </form>
