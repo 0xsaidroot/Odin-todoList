@@ -1,6 +1,7 @@
 export class Project {
-    constructor(name = "default") {
+    constructor(name = "Default") {
         this.name = name;
+        this.desc = "";
         this.todoArray = [];
     }
 }

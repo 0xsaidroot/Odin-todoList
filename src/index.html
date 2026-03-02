@@ -1,65 +1,85 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Odin-todoList</title>
-  </head>
-  <body>
-    <aside id="aside">
-           <h1 id="head">Projects</h1>
-      <div id="projectContainer">
-        <ul id="projectList"></ul>
-        <button id="newProjectBtn">new Project</button>
-      </div>
 
-      <dialog closedby="closerequest" id="newProjectDialogBox">
-        <form method="dialog">
-          <p>
-            <label for="newProjectName">Name :</label
-            ><input type="text" id="newProjectName" />
-          </p>
-          <div class="lower-btn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Odin-todoList</title>
+</head>
+
+<body>
+  <aside id="aside">
+    <h1 id="head">Projects</h1>
+    <div id="projectContainer">
+      <ul id="projectList"></ul>
+      <button id="newProjectBtn">new Project</button>
+    </div>
+
+    <dialog closedby="closerequest" id="newProjectDialogBox">
+      <form method="dialog">
+        <h1>New Project</h1>
+        <p>
+          <label for="newProjectName">Name :</label><input type="text" id="newProjectName" />
+        </p>
+        <div>
+          <label for="desc">Project Description :</label> <br>
+          <textarea id="desc" rows="10" style="width: 100%; resize: none;"></textarea>
+        </div>
+        <div class="lower-proj">
+          <div class="lower">
             <button type="button" class="cancelBtn">Cancel</button>
             <button type="submit" id="addBtn">Add</button>
           </div>
-        </form>
-      </dialog>
+        </div>
+      </form>
+    </dialog>
 
-      <dialog closedby="closerequest" id="editProjectDialogBox">
-        <form method="dialog">
-          <p>
-            <label for="projectNameEdit">Name :</label
-            ><input type="text" id="projectNameEdit" />
-          </p>
+    <dialog closedby="closerequest" id="editProjectDialogBox">
+      <form method="dialog">
+        <h1>Edit Project</h1>
+        <p>
+          <label for="projectNameEdit">Name :</label><input type="text" id="projectNameEdit" />
+        </p>
+        <div>
+          <label for="descEdit">Project Description :</label> <br>
+          <textarea id="descEdit" rows="10" style="width: 100%; resize: none;"></textarea>
+        </div>
+        <div class="lower-proj">
           <button type="button" class="cancelBtn">Cancel</button>
           <button type="submit" id="editBtn">Edit</button>
-        </form>
-      </dialog>
-    </aside>
-    <main id="main">
- 
-      <button id="addTaskBtn">Add Task</button>
+        </div>
+      </form>
+    </dialog>
+  </aside>
+  <main id="main">
 
-      <dialog closedby="closerequest" id="TodoDialog">
-        <form method="dialog">
-          <p>
-            <label for="title">Name :</label><input type="text" id="todoName" />
-          </p>
+    <button id="addTaskBtn">Add Task</button>
+
+    <dialog closedby="closerequest" id="TodoDialog">
+      <form method="dialog">
+        <h1>New Task</h1>
+        <p>
+          <label for="title">Name :</label><input type="text" id="todoName" />
+        </p>
+        <div class="lower">
           <button type="button" class="cancelBtn">Cancel</button>
           <button type="submit" id="addTodoBtn">Add</button>
-        </form>
-      </dialog>
+        </div>
+      </form>
+    </dialog>
 
-      <dialog closedby="closerequest" id="TodoEditDialog">
-        <form method="dialog">
-          <p>
-            <label for="title">Name :</label><input type="text" id="todoNameEditInput" />
-          </p>
-          <button type="button" class="cancelBtn">Cancel</button>
+    <dialog closedby="closerequest" id="TodoEditDialog">
+      <form method="dialog">
+        <h1>Edit Project</h1>
+        <p>
+          <label for="title">Name :</label><input type="text" id="todoNameEditInput" />
+        </p>
+        <div class="lower"><button type="button" class="cancelBtn">Cancel</button>
           <button type="submit" id="todoEditBtn">Edit</button>
-        </form>
-      </dialog>
-    </main>
-  </body>
+        </div>
+      </form>
+    </dialog>
+  </main>
+</body>
+
 </html>
