@@ -11,6 +11,7 @@ const newProjectDialog = document.querySelector('#newProjectDialogBox');
 const editProjectDialog = document.querySelector('#editProjectDialogBox');
 const projectList = document.querySelector('#projectList')
 const newProjectName = document.querySelector('#newProjectName');
+const newProjectDesc = document.querySelector('#desc');
 const editProjectName = document.querySelector('#projectNameEdit');
 
 const aside = document.querySelector('#projectContainer');
@@ -73,7 +74,9 @@ export function addNewProject() {
         if (target.className === "cancelBtn") closeDialog(newProjectDialog);
         else if (target.id === "addBtn") {
             const newProject = new Project(newProjectName.value);
+            newProject.desc = newProjectDesc.value;
             newProjectName.value = '';
+            newProjectDesc.value = '';
 
             openDialog(newProjectDialog);
             saveProject(newProject, projects);
@@ -82,6 +85,7 @@ export function addNewProject() {
         }
         else return;
     })
+    console.log(projects);
 }
 export function editAndClearProject() {
     projectList.addEventListener('click', (event) => {
