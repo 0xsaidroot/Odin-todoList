@@ -1,8 +1,8 @@
 import "./styles.css";
 import { Todo,saveTodoToProject } from './todos.js';
 import { Project,saveProject} from "./project.js";
-import { addNewProject, displayProjects, displayTodosOnClick, editAndClearProject } from "./projectUi.js"
-import { addTodoToProject, editAndClearTodos } from "./todoUi.js";
+import { addNewProject, displayProjects, displayTodosOnClick, editAndClearProject, selectedProject } from "./projectUi.js"
+import { addTodoToProject, displayTodos, editAndClearTodos } from "./todoUi.js";
 
 
 
@@ -65,5 +65,6 @@ addNewProject();
 editAndClearProject();
 addTodoToProject();
 editAndClearTodos();
+
 
 

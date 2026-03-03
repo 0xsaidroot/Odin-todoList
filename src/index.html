@@ -23,7 +23,8 @@
         </p>
         <div>
           <label for="desc">Project Description :</label> <br>
-          <textarea id="desc" rows="10" style="width: 100%; resize: none;" placeholder="my Awesome Project..."></textarea>
+          <textarea id="desc" rows="10" style="width: 100%; resize: none;"
+            placeholder="my Awesome Project..."></textarea>
         </div>
         <div class="lower-proj">
           <div class="lower">
@@ -66,14 +67,15 @@
             placeholder="Tasking..."></textarea>
         </div>
         <p>
-          <label for="todoDate">dueDate :</label><input type="date" id="todoDate">
+          <label for="todoDate">dueDate :</label><input type="date" id="todoDate" value="2026-01-01">
         </p>
-        <div class="priorityDiv"> 
-          <p>Priority :</p>
+        <div class="priorityDiv">
+          <span>Priority :</span>
           <div class="priorityRadios">
-          <input type="radio" name="Priority" id="prior1" value="Low"><label for="prior1">Low</label>
-          <input type="radio" name="Priority" id="prior2" value="Medium"><label for="prior2">Medium</label>
-          <input type="radio" name="Priority" id="prior3" value="High"><label for="prior3">High</label>
+            <span><input type="radio" name="Priority" id="prior1" value="Low"><label for="prior1">Low</label></span>
+            <span><input type="radio" name="Priority" id="prior2" value="Medium"><label
+                for="prior2">Medium</label></span>
+            <span><input type="radio" name="Priority" id="prior3" value="High"><label for="prior3">High</label></span>
           </div>
         </div>
         <div class="lower-proj">
@@ -85,11 +87,30 @@
 
     <dialog closedby="closerequest" id="TodoEditDialog">
       <form method="dialog">
-        <h1>Edit Project</h1>
+        <h1>Edit Task</h1>
         <p>
-          <label for="title">Name :</label><input type="text" id="todoNameEditInput" />
+          <label for="todoNameEditInput">Name :</label><input type="text" id="todoNameEditInput" />
         </p>
-        <div class="lower-proj"><button type="button" class="cancelBtn">Cancel</button>
+        <div>
+          <label for="todoDescEdit">Desc :</label> <textarea id="todoDescEdit" rows="5"
+            style="width: 100%; resize: none;" placeholder="Tasking..."></textarea>
+        </div>
+        <p>
+          <label for="todoDateEdit">dueDate :</label><input type="date" id="todoDateEdit">
+        </p>
+        <div class="priorityDiv">
+          <span>Priority :</span>
+          <div class="priorityRadios">
+            <span><input type="radio" name="Priority" id="prior1Edit" value="Low"><label
+                for="prior1Edit">Low</label></span>
+            <span><input type="radio" name="Priority" id="prior2Edit" value="Medium"><label
+                for="prior2Edit">Medium</label></span>
+            <span><input type="radio" name="Priority" id="prior3Edit" value="High"><label
+                for="prior3Edit">High</label></span>
+          </div>
+        </div>
+        <div class="lower-proj">
+          <button type="button" class="cancelBtn">Cancel</button>
           <button type="submit" id="todoEditBtn">Edit</button>
         </div>
       </form>
