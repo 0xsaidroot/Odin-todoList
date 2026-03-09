@@ -3,7 +3,7 @@ import { openDialog, closeDialog, projects, saveProjects } from "./script.js";
 import { displayTodos } from "./todoUi.js";
 
 
-export const todoList = document.createElement('ul');
+export const todoList = document.createElement('div');
 
 export let selectedProject;
 
