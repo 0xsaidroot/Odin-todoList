@@ -43,6 +43,7 @@ export const closeDialog = (dialog) => dialog.close();
 
 let project1 = new Project();
 let project2 = new Project("Home");
+project1.desc = "Lorem ipsum dolor sit amet consectetur adipisicing ipsa repellendus, saepe tempora aliquid laudantium officia distinctio. Tempore asperiores odit provident iste earum commodi unde nesciunt.";
 let task = [];
 
 for (let i = 1; i <= 5; i++) {

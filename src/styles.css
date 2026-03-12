@@ -40,10 +40,12 @@ main{
     background-color: var(--main-bg-color);
 }
 main #addTaskBtn{
-    margin: 10px;
     font-size: 1.3rem;
-    padding: 5px;
+    padding: 15px;
+    width: 50%;
     border-radius: 20px;
+    justify-self: center;
+    align-self: flex-start;
 
 }
 #projectContainer{
@@ -178,6 +180,31 @@ padding: 10px;
 .todoItem div:nth-child(4){
     display: flex;
     justify-content:flex-start;
-    gap: 1em;
+    gap: 1em;   
+}
+#Header{
+    padding: 1rem;
+    position: relative;
+}
+#headerName{
+   font-size: 3rem;
+}
+#headerBotttom{
+    display: grid;
+    grid-template-columns: 1fr 30%;
+    p{
+        color: var(--desc-color);
+        font-size: 1.2rem;
+    }
+}
+#Header::after{
+    content: '';
+    height: .2em;
+    width: 100%;
+    background-color: var(--underline-color);
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    margin-bottom: 10px;
     
 }
