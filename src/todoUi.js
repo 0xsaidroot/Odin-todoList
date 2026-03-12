@@ -75,11 +75,17 @@ export function displayTodos(projects) {
   for (const todo of projects.todoArray) {
     const todoItem = document.createElement("div");
 
-    const todoItemLeft = document.createElement("div");
-    const todoItemMiddle = document.createElement("div");
-    const todoItemRight = document.createElement("div");
+    const topLeft = document.createElement("div");
+    const topRight = document.createElement("div");
+    const bottomLeft = document.createElement("div");
+    const bottomRight = document.createElement("div");
 
-    const todoItemName = document.createElement('p');
+    const checkBox = document.createElement('input');
+
+    checkBox.type = "checkBox";
+    
+
+    const todoItemName = document.createElement('label');
     const todoItemDesc = document.createElement('p');
     const todoItemDate = document.createElement('p');
     const todoItemPriority = document.createElement('p');
@@ -95,16 +101,20 @@ export function displayTodos(projects) {
     clearItem.className = "clearBtn";
 
     todoItemName.textContent = todo.title;
-    todoItemDesc.textContent = todo.description;
-    todoItemDate.textContent = todo.dueDate;
-    todoItemPriority.textContent = todo.priority;
+    todoItemDesc.textContent =todo.description;
+    todoItemDate.textContent ="dueDate : " + todo.dueDate;
+    todoItemPriority.textContent ="Priority : " + todo.priority;
 
-
-    todoItemMiddle.append(todoItemName,todoItemPriority,todoItemDesc,todoItemDate);
-    todoItemRight.append(editItem,clearItem);
+    topLeft.append(checkBox,todoItemName);
+    topRight.append(editItem,clearItem);
+    bottomLeft.append(todoItemDesc);
+    bottomRight.append(todoItemPriority,todoItemDate);
+    
     
     todoList.className = "todoContainer";
-    todoItem.append(todoItemLeft,todoItemMiddle,todoItemRight);
+    todoItem.className = "todoItem";
+
+    todoItem.append(topLeft,topRight,bottomLeft,bottomRight);
     todoList.append(todoItem);
   }
 

@@ -7,6 +7,7 @@
     --aside-bg-color:#80ed99;
     --main-bg-color:#c7f9cc;
     --underline-color:#38a3a5;
+    --desc-color:gray;
 }
 body{
     height: 100vh;
@@ -128,4 +129,46 @@ textarea{
     display:flex ;
     flex-direction: column;
     gap: 10px;
+    padding: 4rem 6rem 3rem 3rem;
+}
+.todoItem{
+    background-color: #83da8c;
+    display: grid;
+    font-size: 1rem;
+    grid-template-columns: 1fr 25%;
+    border-radius: 10%;
+}
+.todoItem div:first-child{
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+
+    input[type="checkBox"]{
+        margin: 0px 10px;
+    transform: scale(1.5); 
+    }
+}
+.todoItem div:nth-child(2){
+    display: flex;
+    justify-content: flex-start;
+    gap: 1em;
+    
+button{
+border-radius: 10px;
+padding: 10px;
+}
+}
+
+.todoItem div:nth-child(3){
+    font-size: 1.2rem;
+    margin-left: 30px ;
+    color: var(--desc-color);
+
+}
+
+.todoItem div:nth-child(4){
+    display: flex;
+    justify-content:flex-start;
+    gap: 1em;
+    
 }

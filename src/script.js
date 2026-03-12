@@ -1,4 +1,5 @@
 import "./styles.css";
+import "pretty-checkbox/dist/pretty-checkbox.min.css";
 import { Todo,saveTodoToProject } from './todos.js';
 import { Project,saveProject} from "./project.js";
 import { addNewProject, displayProjects, displayTodosOnClick, editAndClearProject, selectedProject } from "./projectUi.js"
@@ -45,7 +46,7 @@ let project2 = new Project("Home")
 let task = [];
 
 for (let i = 1; i <= 5; i++) {
-    task[i] = new Todo(`Programming ${i}`, "A short or long desc", '11/22/26', 'Very High');
+    task[i] = new Todo(`Programming ${i}`, "A short or long desc", '11/22/26', 'High');
     saveTodoToProject(task[i], project1);
     saveTodoToProject(task[i], project2);
 }
