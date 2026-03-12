@@ -53,8 +53,13 @@
     </dialog>
   </aside>
   <main id="main">
-
-    <button id="addTaskBtn">+Add Task</button>
+    <div id="Header">
+      <p id="headerName"></p>
+      <div id="headerBotttom">
+        <p id="headerDesc"></p>
+        <button id="addTaskBtn">+Add Task</button>
+      </div>
+    </div>
 
     <dialog closedby="closerequest" id="TodoDialog">
       <form method="dialog">
@@ -84,7 +89,6 @@
         </div>
       </form>
     </dialog>
-
     <dialog closedby="closerequest" id="TodoEditDialog">
       <form method="dialog">
         <h1>Edit Task</h1>

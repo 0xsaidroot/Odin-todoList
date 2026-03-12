@@ -28,6 +28,7 @@ export function addTodoToProject() {
     if (!choosedProject) choosedProject = projects[0];
 
     console.log(choosedProject);
+
     openDialog(todoDialog);
   });
   priorityBox.addEventListener("click", function (e) {
@@ -110,7 +111,6 @@ export function displayTodos(projects) {
     bottomLeft.append(todoItemDesc);
     bottomRight.append(todoItemPriority,todoItemDate);
     
-    
     todoList.className = "todoContainer";
     todoItem.className = "todoItem";
 
@@ -124,7 +124,7 @@ export function editAndClearTodos() {
   main.addEventListener("click", function (event) {
     let target = event.target;
     if (target.className === "clearBtn") {
-      let Item = target.closest("li");
+      let Item = target.closest(".todoItem");
 
       console.log(Item);
 
@@ -137,7 +137,7 @@ export function editAndClearTodos() {
         saveProjects();
       }
     } else if (target.className === "editBtn") {
-      let item = target.closest("li");
+      let item = target.closest(".todoItem");
       if (!item) return;
       console.log(item);
 

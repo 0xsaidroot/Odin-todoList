@@ -16,7 +16,8 @@ const editProjectName = document.querySelector('#projectNameEdit');
 const editProjectDesc = document.querySelector('#descEdit');
 const aside = document.querySelector('#projectContainer');
 
-
+const projectUiName = document.querySelector('#headerName');
+const projectUiDesc = document.querySelector('#headerDesc');
 
 export function displayProjects(projects) {
 
@@ -51,7 +52,8 @@ export function displayTodosOnClick(projects) {
 
         if (!projectItem) return;
 
-        todoList.replaceChildren();
+        projectUiName.textContent = projectItem.name;
+        projectUiDesc.textContent = projectItem.desc;
         displayTodos(projectItem);
     })
 }
