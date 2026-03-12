@@ -8,6 +8,7 @@
     --main-bg-color:#c7f9cc;
     --underline-color:#38a3a5;
     --desc-color:gray;
+    --todoItem-color:#83da8c;
 }
 body{
     height: 100vh;
@@ -37,6 +38,16 @@ aside #head::after{
 }
 main{
     background-color: var(--main-bg-color);
+    position: relative;
+}
+main #addTaskBtn{
+    position: absolute;
+    font-size: 1.3rem;
+    padding: 5px;
+    border-radius: 20px;
+    right: 0;
+    top: 40px;
+
 }
 #projectContainer{
     position: relative;
@@ -126,13 +137,14 @@ textarea{
 }
 .todoContainer{
     list-style-type: none;
+    position:relative;
     display:flex ;
     flex-direction: column;
     gap: 10px;
-    padding: 4rem 6rem 3rem 3rem;
+    padding: 7rem 6rem 3rem 3rem;
 }
 .todoItem{
-    background-color: #83da8c;
+    background-color:var(--todoItem-color);
     display: grid;
     font-size: 1rem;
     grid-template-columns: 1fr 25%;
