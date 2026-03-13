@@ -16,8 +16,8 @@ const editProjectName = document.querySelector('#projectNameEdit');
 const editProjectDesc = document.querySelector('#descEdit');
 const aside = document.querySelector('#projectContainer');
 
-const projectUiName = document.querySelector('#headerName');
-const projectUiDesc = document.querySelector('#headerDesc');
+// const projectUiName = document.querySelector('#headerName');
+// const projectUiDesc = document.querySelector('#headerDesc');
 
 export function displayProjects(projects) {
 
@@ -52,8 +52,6 @@ export function displayTodosOnClick(projects) {
 
         if (!projectItem) return;
 
-        projectUiName.textContent = projectItem.name;
-        projectUiDesc.textContent = projectItem.desc;
         displayTodos(projectItem);
     })
 }
@@ -118,6 +116,9 @@ export function editAndClearProject() {
             const projectItem = projects.find(obj => obj.id === item.id);
             if (!projectItem) return;
             deleteProject(projectItem, projects);
+
+            displayTodos(projects[0]);
+
             displayProjects(projects);
             saveProjects();
             editProjectName.value = '';

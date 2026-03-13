@@ -46,7 +46,6 @@ main #addTaskBtn{
     border-radius: 20px;
     justify-self: center;
     align-self: flex-start;
-
 }
 #projectContainer{
     position: relative;
@@ -205,6 +204,5 @@ padding: 10px;
     position: absolute;
     bottom: -10px;
     left: 0;
-    margin-bottom: 10px;
-    
+    margin-bottom: 10px;   
 }

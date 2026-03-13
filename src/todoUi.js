@@ -22,6 +22,9 @@ export const editTodo = document.querySelector("#todoEditBtn");
 
 let choosedProject = null;
 
+const projectUiName = document.querySelector('#headerName');
+const projectUiDesc = document.querySelector('#headerDesc');
+
 export function addTodoToProject() {
   addTodo.addEventListener("click", () => {
     choosedProject = selectedProject;
@@ -70,10 +73,13 @@ export function addTodoToProject() {
     } else return;
   });
 }
-export function displayTodos(projects) {
+export function displayTodos(projectItem) {
   todoList.replaceChildren();
 
-  for (const todo of projects.todoArray) {
+    projectUiName.textContent = projectItem.name;
+    projectUiDesc.textContent = projectItem.desc;
+
+  for (const todo of projectItem.todoArray) {
     const todoItem = document.createElement("div");
 
     const topLeft = document.createElement("div");

@@ -68,5 +68,7 @@ editAndClearProject();
 addTodoToProject();
 editAndClearTodos();
 
+displayTodos(projects[0]);
+
 
 
