@@ -47,7 +47,7 @@ project1.desc = "Lorem ipsum dolor sit amet consectetur adipisicing ipsa repelle
 let task = [];
 
 for (let i = 1; i <= 5; i++) {
-    task[i] = new Todo(`Programming ${i}`, "A short or long desc", '11/22/26', 'High');
+    task[i] = new Todo(`Programming ${i}`, "A short or long desc", '2026-03-13', 'High');
     saveTodoToProject(task[i], project1);
     saveTodoToProject(task[i], project2);
 }

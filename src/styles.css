@@ -142,7 +142,7 @@ textarea{
     padding: 1rem 6rem 3rem 3rem;
 }
 .todoItem{
-    background-color:var(--todoItem-color);
+    background-color:var(--aside-bg-color);
     display: grid;
     font-size: 1rem;
     grid-template-columns: 1fr 25%;

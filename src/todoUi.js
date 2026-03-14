@@ -7,6 +7,7 @@ import {
   main,
   saveProjects,
 } from "./script.js";
+import { formatDistance } from "date-fns";
 
 export const todoDialog = document.querySelector("#TodoDialog");
 export const todoNameInput = document.querySelector("#todoName");
@@ -109,7 +110,12 @@ export function displayTodos(projectItem) {
 
     todoItemName.textContent = todo.title;
     todoItemDesc.textContent =todo.description;
-    todoItemDate.textContent ="dueDate : " + todo.dueDate;
+    
+ 
+    const distance = formatDistance(todo.dueDate,new Date());
+    console.log(distance);
+
+    todoItemDate.textContent ="dueIn : " + distance;
     todoItemPriority.textContent ="Priority : " + todo.priority;
 
     topLeft.append(checkBox,todoItemName);

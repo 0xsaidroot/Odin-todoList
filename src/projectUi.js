@@ -16,9 +16,6 @@ const editProjectName = document.querySelector('#projectNameEdit');
 const editProjectDesc = document.querySelector('#descEdit');
 const aside = document.querySelector('#projectContainer');
 
-// const projectUiName = document.querySelector('#headerName');
-// const projectUiDesc = document.querySelector('#headerDesc');
-
 export function displayProjects(projects) {
 
     projectList.replaceChildren();
@@ -140,6 +137,7 @@ export function editAndClearProject() {
             closeDialog(editProjectDialog);
 
             displayProjects(projects);
+            displayTodos(editingItem);
             saveProjects();
             editProjectName.value = '';
 
