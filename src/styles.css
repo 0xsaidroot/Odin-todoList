@@ -9,6 +9,7 @@
     --underline-color:#38a3a5;
     --desc-color:#01634a;
     --todoItem-color:#83da8c;
+    --hover-color:#588157;
 }
 body{
     height: 100vh;
@@ -62,6 +63,12 @@ main #addTaskBtn{
     display: grid;
     grid-template-columns: 1fr 20% 20%;
     gap: 1rem;
+    background-color: none;
+}
+#projectList li:hover,.takenProject{
+    background-color: var(--hover-color);
+    padding: 5px 5px 5px 0;
+    border-radius: 10px;
 }
 #projectList li button{
     border-radius: 20px;
@@ -179,7 +186,7 @@ padding: 10px;
 .todoItem div:nth-child(4){
     display: flex;
     justify-content:flex-start;
-    gap: 1em;   
+    gap: 5px;   
 }
 #Header{
     padding: 1rem;

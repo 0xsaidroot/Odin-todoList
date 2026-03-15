@@ -48,7 +48,6 @@ export function displayTodosOnClick(projects) {
         selectedProject = projectItem;
 
         if (!projectItem) return;
-
         displayTodos(projectItem);
     })
 }
