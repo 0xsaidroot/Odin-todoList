@@ -2,32 +2,38 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-}  
-:root{
-    --aside-bg-color:#80ed99;
-    --main-bg-color:#c7f9cc;
-    --underline-color:#38a3a5;
-    --desc-color:#01634a;
-    --todoItem-color:#83da8c;
-    --hover-color:#588157;
 }
-body{
+
+:root {
+    --aside-bg-color: #80ed99;
+    --main-bg-color: #c7f9cc;
+    --underline-color: #38a3a5;
+    --desc-color: #01634a;
+    --todoItem-color: #83da8c;
+    --selected-color: #588157;
+    --hover-color:#57cc99;
+}
+
+body {
     height: 100vh;
     display: grid;
-    grid-template-columns: min(45%,400px)  1fr;
+    grid-template-columns: min(45%, 400px) 1fr;
     grid-template-rows: 1fr;
 }
-aside{
+
+aside {
     background-color: var(--aside-bg-color);
     padding: 5rem 2rem;
 
 }
-aside #head{
-position: relative;
-margin-bottom: 2rem;
-font-size: 3em;
+
+aside #head {
+    position: relative;
+    margin-bottom: 2rem;
+    font-size: 3em;
 }
-aside #head::after{
+
+aside #head::after {
     content: '';
     height: .1em;
     width: 100%;
@@ -35,12 +41,14 @@ aside #head::after{
     position: absolute;
     bottom: -10px;
     left: 0;
-    
+
 }
-main{
+
+main {
     background-color: var(--main-bg-color);
 }
-main #addTaskBtn{
+
+main #addTaskBtn {
     font-size: 1.3rem;
     padding: 15px;
     width: 50%;
@@ -48,10 +56,12 @@ main #addTaskBtn{
     justify-self: center;
     align-self: flex-start;
 }
-#projectContainer{
+
+#projectContainer {
     position: relative;
 }
-#projectContainer #newProjectBtn{
+
+#projectContainer #newProjectBtn {
     position: absolute;
     font-size: 1rem;
     padding: 5px;
@@ -59,21 +69,35 @@ main #addTaskBtn{
     right: 0;
     bottom: -70px;
 }
-#projectList li{
+
+#projectList li {
     display: grid;
     grid-template-columns: 1fr 20% 20%;
     gap: 1rem;
-    background-color: none;
 }
-#projectList li:hover,.takenProject{
+
+#projectList li:hover,
+.takenProject {
     background-color: var(--hover-color);
     padding: 5px 5px 5px 0;
     border-radius: 10px;
 }
-#projectList li button{
+.takenProject {
+    background-color: var(--selected-color);
+    padding: 5px 5px 5px 0;
+    border-radius: 10px;
+}
+#projectList li:not(.takenProject) {
+    background: none;
+    padding:0;
+    border-radius: 0;
+}
+
+#projectList li button {
     border-radius: 20px;
 }
-#projectList{
+
+#projectList {
     display: flex;
     flex-direction: column;
     list-style-type: none;
@@ -81,24 +105,28 @@ main #addTaskBtn{
     gap: 1rem;
     font-size: 2rem;
 }
-dialog{
-    width: min(50%,600px);
+
+dialog {
+    width: min(50%, 600px);
     height: 500px;
     border-radius: 10px;
     place-self: center;
 }
-dialog::backdrop{
+
+dialog::backdrop {
     opacity: .75;
     background-color: gray;
 }
-form{
+
+form {
     height: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 3rem 2rem;
 }
-form p{
+
+form p {
     width: 100%;
     display: grid;
     grid-auto-flow: column;
@@ -106,33 +134,37 @@ form p{
     font-size: 1.6rem;
     gap: 1em;
 
-input{
-    font-size: 1rem;
-}
+    input {
+        font-size: 1rem;
+    }
 }
 
-form .lower-proj{
+form .lower-proj {
     margin-top: auto;
     text-align: center;
 }
-.lower-proj button{
+
+.lower-proj button {
     padding: .5rem;
     border-radius: 30%;
     font-size: 2rem;
     margin-right: 10px;
 }
-textarea{
+
+textarea {
     padding: 5px;
     font-size: 1rem;
     width: 100%;
 }
-.priorityDiv{
+
+.priorityDiv {
     display: grid;
     font-size: 20px;
     gap: 20px;
     grid-template-columns: auto 1fr;
 }
-.priorityRadios{
+
+.priorityRadios {
 
     display: flex;
     align-items: center;
@@ -140,70 +172,79 @@ textarea{
     width: 100%;
 
 }
-.todoContainer{
+
+.todoContainer {
     list-style-type: none;
-    position:relative;
-    display:flex ;
+    position: relative;
+    display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 1rem 6rem 3rem 3rem;
 }
-.todoItem{
-    background-color:var(--aside-bg-color);
+
+.todoItem {
+    background-color: var(--aside-bg-color);
     display: grid;
     font-size: 1rem;
     grid-template-columns: 1fr 25%;
     border-radius: 10%;
 }
-.todoItem div:first-child{
+
+.todoItem div:first-child {
     display: flex;
     align-items: center;
     font-size: 2rem;
 
-    input[type="checkBox"]{
+    input[type="checkBox"] {
         margin: 0px 10px;
-    transform: scale(1.5); 
+        transform: scale(1.5);
     }
 }
-.todoItem div:nth-child(2){
+
+.todoItem div:nth-child(2) {
     display: flex;
     justify-content: flex-start;
     gap: 1em;
-    
-button{
-border-radius: 25px;
-padding: 10px;
-}
+
+    button {
+        border-radius: 25px;
+        padding: 10px;
+    }
 }
 
-.todoItem div:nth-child(3){
+.todoItem div:nth-child(3) {
     font-size: 1.2rem;
-    margin-left: 30px ;
+    margin-left: 30px;
     color: var(--desc-color);
 
 }
 
-.todoItem div:nth-child(4){
+.todoItem div:nth-child(4) {
     display: flex;
-    justify-content:flex-start;
-    gap: 5px;   
+    justify-content: flex-start;
+    gap: 5px;
 }
-#Header{
+
+#Header {
     padding: 1rem;
     position: relative;
 }
-#headerName{
-   font-size: 3rem;
+
+#headerName {
+    font-size: 3rem;
 }
-#headerBotttom{
+
+#headerBotttom {
     display: grid;
     grid-template-columns: 1fr 30%;
-    p{
+
+    p {
         color: var(--desc-color);
         font-size: 1.2rem;
     }
 }
-#Header::after{
+
+#Header::after {
     content: '';
     height: .2em;
     width: 100%;
@@ -211,5 +252,5 @@ padding: 10px;
     position: absolute;
     bottom: -10px;
     left: 0;
-    margin-bottom: 10px;   
+    margin-bottom: 10px;
 }

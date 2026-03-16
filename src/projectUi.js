@@ -47,6 +47,8 @@ export function displayTodosOnClick(projects) {
 
         selectedProject = projectItem;
 
+        document.getElementById(`${selectedProject.id}`).classList.toggle('takenProject');
+
         if (!projectItem) return;
         displayTodos(projectItem);
     })
