@@ -71,6 +71,11 @@ export function addNewProject() {
             newProjectDesc.value = '';
         }
         else if (target.id === "addBtn") {
+            if (!newProjectName.value.trim()) {
+                alert("Please enter a project name.");
+                return;
+            }
+
             const newProject = new Project(newProjectName.value);
             newProject.desc = newProjectDesc.value;
             newProjectName.value = '';
@@ -125,6 +130,12 @@ export function editAndClearProject() {
 
         if (target.className === "cancelBtn") closeDialog(editProjectDialog);
         else if (target.id === "editBtn") {
+            // Validation
+            if (!editProjectName.value.trim()) {
+                alert("Please enter a project name.");
+                return;
+            }
+
             const editingItem = projects.find(item => item.id === editProjectDialog.dataset.editingId);
             if (!editingItem) return;
             console.log(editingItem);

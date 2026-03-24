@@ -47,7 +47,9 @@ aside #head::after {
 main {
     background-color: var(--main-bg-color);
 }
-
+input[type="checkbox"]:checked + label {
+ text-decoration: line-through;
+}
 main #addTaskBtn {
     font-size: 1.3rem;
     padding: 15px;

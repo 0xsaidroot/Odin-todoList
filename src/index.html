@@ -19,7 +19,7 @@
       <form method="dialog">
         <h1>New Project</h1>
         <p>
-          <label for="newProjectName">Name :</label><input type="text" id="newProjectName" />
+          <label for="newProjectName">Name :</label><input type="text" id="newProjectName" required/>
         </p>
         <div>
           <label for="desc">Project Description :</label> <br>
@@ -65,14 +65,14 @@
       <form method="dialog">
         <h1>New Task</h1>
         <p>
-          <label for="todoName">Name :</label><input type="text" id="todoName" />
+          <label for="todoName">Name :</label><input type="text" id="todoName" required/>
         </p>
         <div>
           <label for="todoDesc">Desc :</label> <textarea id="todoDesc" rows="5" style="width: 100%; resize: none;"
             placeholder="Tasking..."></textarea>
         </div>
         <p>
-          <label for="todoDate">dueDate :</label><input type="date" id="todoDate">
+          <label for="todoDate">dueDate :</label><input type="date" id="todoDate" required>
         </p>
         <div class="priorityDiv">
           <span>Priority :</span>
