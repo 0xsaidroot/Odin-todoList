@@ -76,8 +76,7 @@ main #addTaskBtn {
     gap: 1rem;
 }
 
-#projectList li:hover,
-.takenProject {
+#projectList li:hover{
     background-color: var(--hover-color);
     padding: 5px 5px 5px 0;
     border-radius: 10px;
@@ -86,11 +85,6 @@ main #addTaskBtn {
     background-color: var(--selected-color);
     padding: 5px 5px 5px 0;
     border-radius: 10px;
-}
-#projectList li:not(.takenProject) {
-    background: none;
-    padding:0;
-    border-radius: 0;
 }
 
 #projectList li button {
@@ -221,8 +215,8 @@ textarea {
 
 .todoItem div:nth-child(4) {
     display: flex;
-    justify-content: flex-start;
-    gap: 5px;
+    justify-content: space-evenly;
+    gap: 3px;
 }
 
 #Header {

@@ -46,9 +46,6 @@ export function displayTodosOnClick(projects) {
         let projectItem = projects.find(item => item.id === target);
 
         selectedProject = projectItem;
-
-        document.getElementById(`${selectedProject.id}`).classList.toggle('takenProject');
-
         if (!projectItem) return;
         displayTodos(projectItem);
     })

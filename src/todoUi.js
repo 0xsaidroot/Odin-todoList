@@ -13,6 +13,7 @@ export const todoDialog = document.querySelector("#TodoDialog");
 export const todoNameInput = document.querySelector("#todoName");
 export const todoDesc = document.querySelector("#todoDesc");
 export const todoDate = document.querySelector("#todoDate");
+todoDate.value = new Date();
 export const priorityBox = document.querySelector(".priorityRadios");
 
 const addTodo = document.querySelector("#addTaskBtn");
@@ -26,10 +27,30 @@ export const editTodo = document.querySelector("#todoEditBtn");
 
 let choosedProject = null;
 
-let selectedEditPriority = null;
+
 let selectedPriority = null;
 let radioEditSelectedId = null;
 let radioSelectedId = null;
+let selectedEditPriority = null;
+
+priorityEditBox.addEventListener("click", function (e) {
+  let target = e.target.id;
+  switch (target) {
+    case "prior3Edit":
+      radioEditSelectedId = "#prior3Edit";
+      selectedEditPriority = "High";
+      break;
+    case "prior2Edit":
+      radioEditSelectedId = "#prior2Edit";
+      selectedEditPriority = "Medium"
+      break;
+    default:
+      radioEditSelectedId = "#prior1Edit";
+      selectedEditPriority = "Low"
+      break;
+  }
+  todoItem.priority = selectedEditPriority;
+});
 
 const projectUiName = document.querySelector('#headerName');
 const projectUiDesc = document.querySelector('#headerDesc');
@@ -164,12 +185,10 @@ export function editAndClearTodos() {
       let item = target.closest(".todoItem");
 
       if (!item) return;
-      console.log({ item });
+      console.log(item);
 
 
-      let todoItem = choosedProject.todoArray.find(
-        (obj) => obj.id === item.id,
-      );
+      let todoItem = choosedProject.todoArray.find((obj) => obj.id === item.id);
 
       if (!todoItem) return;
 
@@ -193,15 +212,14 @@ export function editAndClearTodos() {
     } else return;
   });
   todoEditDialog.addEventListener("click", function (event) {
+
     let target = event.target;
 
     if (target.className === "cancelBtn") closeDialog(todoEditDialog);
     else if (target.id === "todoEditBtn") {
       console.log("clicked Edit");
 
-      let todoItem = choosedProject.todoArray.find(
-        (obj) => obj.id === todoEditDialog.dataset.editingId,
-      );
+      let todoItem = choosedProject.todoArray.find((obj) => obj.id === todoEditDialog.dataset.editingId);
       if (!todoItem) return;
 
       console.log(todoItem);
@@ -210,27 +228,10 @@ export function editAndClearTodos() {
       todoItem.dueDate = todoEditDateInput.value;
       todoItem.description = todoEditDescInput.value;
 
-      priorityEditBox.addEventListener("click", function (e) {
-        let target = e.target.id;
-        switch (target) {
-          case "prior3Edit":
-            radioEditSelectedId = "#prior3Edit";
-            selectedEditPriority = "High";
-            break;
-          case "prior2Edit":
-            radioEditSelectedId = "#prior2Edit";
-            selectedEditPriority = "Medium"
-            break;
-          default:
-            radioEditSelectedId = "#prior1Edit";
-            selectedEditPriority = "Low"
-            break;
-        }
 
-      });
-      todoItem.priority = selectedEditPriority;
+
       console.log(todoItem);
-      
+
       closeDialog(todoEditDialog);
       displayTodos(choosedProject);
       saveProjects();
@@ -238,7 +239,8 @@ export function editAndClearTodos() {
       todoEditNameInput.value = "";
       todoEditDateInput.value = new Date();
       todoEditDescInput.value = "";
-      if(radioSelectedId !==null ) document.querySelector(radioEditSelectedId).checked = false;
+
+      if (radioSelectedId !== null) document.querySelector(radioEditSelectedId).checked = false;
 
       console.log({ todoItem });
     } else return;
