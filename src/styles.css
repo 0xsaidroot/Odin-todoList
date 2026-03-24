@@ -78,7 +78,7 @@ main #addTaskBtn {
     gap: 1rem;
 }
 
-#projectList li:hover{
+#projectList li:not(.takenProject):hover{
     background-color: var(--hover-color);
     padding: 5px 5px 5px 0;
     border-radius: 10px;
