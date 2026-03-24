@@ -1,118 +1,267 @@
-import { Todo,saveTodoToProject } from "./todos.js";
-import { selectedProject,todoList } from "./projectUi.js";
-import { projects,openDialog,closeDialog,main } from "./script.js";
+import { Todo, saveTodoToProject, deleteTodoFromProject } from "./todos.js";
+import { selectedProject, todoList } from "./projectUi.js";
+import {
+  projects,
+  openDialog,
+  closeDialog,
+  main,
+  saveProjects,
+} from "./script.js";
+import { formatDistance } from "date-fns";
 
+export const todoDialog = document.querySelector("#TodoDialog");
+export const todoNameInput = document.querySelector("#todoName");
+export const todoDesc = document.querySelector("#todoDesc");
+export const todoDate = document.querySelector("#todoDate");
+todoDate.valueAsDate = new Date();
+export const priorityBox = document.querySelector(".priorityRadios");
 
-export const todoDialog = document.querySelector('#TodoDialog');
-export const todoNameInput = document.querySelector('#todoName');
-const addTodo = document.querySelector('#addTaskBtn')
+const addTodo = document.querySelector("#addTaskBtn");
 
-export const todoEditDialog = document.querySelector('#TodoEditDialog');
-export const todoEditNameInput = document.querySelector('#todoNameEditInput');
-export const editTodo = document.querySelector('#todoEditBtn')
+export const priorityEditBox = document.querySelector(".priorityEditRadios");
+export const todoEditDialog = document.querySelector("#TodoEditDialog");
+export const todoEditNameInput = document.querySelector("#todoNameEditInput");
+export const todoEditDescInput = document.querySelector("#todoDescEdit");
+export const todoEditDateInput = document.querySelector("#todoDateEdit");
+export const editTodo = document.querySelector("#todoEditBtn");
 
 let choosedProject = null;
 
-export function addTodoToProject(){
-addTodo.addEventListener('click', () => {
 
-    choosedProject = selectedProject;
+let selectedPriority = null;
+let radioEditSelectedId = null;
+let radioSelectedId = null;
+let selectedEditPriority = null;
 
-    if (!choosedProject) choosedProject = projects[0];
+priorityEditBox.addEventListener("click", function (e) {
+  let target = e.target.id;
+  switch (target) {
+    case "prior3Edit":
+      radioEditSelectedId = "#prior3Edit";
+      selectedEditPriority = "High";
+      break;
+    case "prior2Edit":
+      radioEditSelectedId = "#prior2Edit";
+      selectedEditPriority = "Medium"
+      break;
+    default:
+      radioEditSelectedId = "#prior1Edit";
+      selectedEditPriority = "Low"
+      break;
+  }
+});
+
+const projectUiName = document.querySelector('#headerName');
+const projectUiDesc = document.querySelector('#headerDesc');
+
+export function addTodoToProject() {
+  addTodo.addEventListener("click", () => {
+
+    choosedProject = selectedProject ?? projects[0];
 
     console.log(choosedProject);
     openDialog(todoDialog);
-})
-todoDialog.addEventListener('click', function (event) {
+  });
+  priorityBox.addEventListener("click", function (e) {
+    let target = e.target.id;
+    switch (target) {
+      case "prior3":
+        radioSelectedId = "#prior3";
+        selectedPriority = "High";
+        break;
+      case "prior2":
+        radioSelectedId = "#prior2";
+        selectedPriority = "Medium"
+        break;
+      default:
+        radioSelectedId = "#prior1";
+        selectedPriority = "Low"
+        break;
+    }
+
+  });
+  todoDialog.addEventListener("click", function (event) {
     let target = event.target;
 
     if (target.className === "cancelBtn") closeDialog(todoDialog);
     else if (target.id === "addTodoBtn") {
-        const todoName = todoNameInput.value;
-        const todo = new Todo(todoName, '', '', '');
-        closeDialog(todoDialog);
-        todoNameInput.value = "";
-        let projectItem = projects.find(item => item.id === choosedProject.id);
-        saveTodoToProject(todo, projectItem);
-        displayTodos(projectItem);
+      if (!todoNameInput.value.trim()) {
+        alert("Please enter a task name.");
+        return;
+      }
+      if (!selectedPriority) {
+        alert("Please select a priority.");
+        return;
+      }
 
-    }
-    else return;
-})
+      const todo = new Todo(
+        todoNameInput.value,
+        todoDesc.value,
+        todoDate.value,
+        selectedPriority,
+      );
+      console.log(todo);
+      closeDialog(todoDialog);
+      document.querySelector(radioSelectedId).checked = false;
+      todoNameInput.value = "";
+      todoDesc.value = "";
+      todoDate.valueAsDate = new Date();
+      selectedPriority = null;
+
+      let projectItem = projects.find((item) => item.id === choosedProject.id);
+      saveTodoToProject(todo, projectItem);
+      displayTodos(projectItem);
+      saveProjects();
+    } else return;
+  });
 }
-export function displayTodos(projects) {
-    todoList.replaceChildren();
+export function displayTodos(projectItem) {
+  todoList.replaceChildren();
 
-    for (const todo of projects.todoArray) {
-        const todoItem = document.createElement('li');
-        const clearItem = document.createElement('button');
-        const editItem = document.createElement('button');
+  projectUiName.textContent = projectItem.name;
+  projectUiDesc.textContent = projectItem.desc;
 
-        todoItem.id = todo.id;
-        editItem.textContent = "Edit";
-        editItem.className = 'editBtn';
-        clearItem.textContent = 'Clear';
-        clearItem.className = 'clearBtn';
-        todoItem.textContent = todo.title;
-        todoItem.append(editItem, clearItem);
-        todoList.append(todoItem);
-    }
+  for (const todo of projectItem.todoArray) {
+    const todoItem = document.createElement("div");
 
-    main.append(todoList);
+    const topLeft = document.createElement("div");
+    const topRight = document.createElement("div");
+    const bottomLeft = document.createElement("div");
+    const bottomRight = document.createElement("div");
+
+    const checkBox = document.createElement('input');
+
+    checkBox.type = "checkBox";
+    checkBox.className = "check";
+
+
+    const todoItemName = document.createElement('label');
+    const todoItemDesc = document.createElement('p');
+    const todoItemDate = document.createElement('p');
+    const todoItemPriority = document.createElement('p');
+
+    const clearItem = document.createElement("button");
+    const editItem = document.createElement("button");
+
+    todoItem.id = todo.id;
+
+    editItem.textContent = "Edit";
+    editItem.className = "editBtn";
+    clearItem.textContent = "Clear";
+    clearItem.className = "clearBtn";
+
+    todoItemName.textContent = todo.title;
+    todoItemDesc.textContent = todo.description;
+
+
+    const distance = formatDistance(todo.dueDate, new Date());
+    console.log(distance);
+
+    todoItemDate.textContent = "dueIn : " + distance;
+    todoItemPriority.textContent = "Priority : " + todo.priority;
+
+    topLeft.append(checkBox, todoItemName);
+    topRight.append(editItem, clearItem);
+    bottomLeft.append(todoItemDesc);
+    bottomRight.append(todoItemPriority, todoItemDate);
+
+    todoList.className = "todoContainer";
+    todoItem.className = "todoItem";
+
+    todoItem.append(topLeft, topRight, bottomLeft, bottomRight);
+    todoList.append(todoItem);
+  }
+
+  main.append(todoList);
 }
-export function editAndClearTodos(){
-    main.addEventListener('click', function (event) {
+export function editAndClearTodos() {
+  main.addEventListener("click", function (event) {
+    choosedProject = selectedProject ?? projects[0];
     let target = event.target;
-    if (target.className === 'clearBtn') {
-        let Item = target.closest('li');
+    if (target.className === "clearBtn") {
+      let Item = target.closest(".todoItem");
 
-        console.log(Item);
-        console.log(selectedProject);
+      console.log(Item);
+      if (!Item) return;
 
-        deleteTodoFromProject(Item, selectedProject);
-
-        console.log(selectedProject);
-
-        displayTodos(selectedProject);
+      const todoObj = choosedProject.todoArray.find((t) => t.id === Item.id);
+      if (todoObj) {
+        deleteTodoFromProject(todoObj, choosedProject);
+        displayTodos(choosedProject);
+        saveProjects();
+      }
     } else if (target.className === "editBtn") {
-        let item = target.closest("li");
-        if (!item) return;
-        console.log(item);
+      let item = target.closest(".todoItem");
 
-        let todoItem = selectedProject.todoArray.find(obj => obj.id === item.id);
-        if (!todoItem) return;
+      if (!item) return;
+      console.log(item);
 
-        console.log(todoItem);
-        openDialog(todoEditDialog);
 
-        todoEditDialog.dataset.editingId = todoItem.id;
-        todoEditNameInput.value = todoItem.title;
-    } else return
-})
-todoEditDialog.addEventListener('click', function (event) {
+      let todoItem = choosedProject.todoArray.find((obj) => obj.id === item.id);
+
+      if (!todoItem) return;
+
+      console.log(todoItem);
+      openDialog(todoEditDialog);
+
+      todoEditDialog.dataset.editingId = todoItem.id;
+      todoEditNameInput.value = todoItem.title;
+      todoEditDescInput.value = todoItem.description;
+      todoEditDateInput.value = todoItem.dueDate;
+
+      let PriorEdit = null;
+
+      if (todoItem.priority === "High") {
+        PriorEdit = "#prior3Edit"
+      } else if (todoItem.priority === "Medium") {
+        PriorEdit = "#prior2Edit"
+      } else PriorEdit = "#prior1Edit";
+      document.querySelector(PriorEdit).checked = true;
+
+    }else return;
+  });
+  todoEditDialog.addEventListener("click", function (event) {
+
     let target = event.target;
 
     if (target.className === "cancelBtn") closeDialog(todoEditDialog);
     else if (target.id === "todoEditBtn") {
+      // Validation
+      if (!todoEditNameInput.value.trim()) {
+        alert("Please enter a task name.");
+        return;
+      }
+      if (!selectedEditPriority) {
+        alert("Please select a priority.");
+        return;
+      }
 
-        console.log("clicked Edit");
+      console.log("clicked Edit");
 
-        let todoItem = selectedProject.todoArray.find(obj => obj.id === todoEditDialog.dataset.editingId);
-        if (!todoItem) return;
+      let todoItem = choosedProject.todoArray.find((obj) => obj.id === todoEditDialog.dataset.editingId);
+      if (!todoItem) return;
 
-        console.log(todoItem);
+      console.log(todoItem);
 
-        todoItem.title = todoEditNameInput.value;
+      todoItem.title = todoEditNameInput.value;
+      todoItem.dueDate = todoEditDateInput.value;
+      todoItem.description = todoEditDescInput.value;
+      todoItem.priority = selectedEditPriority;
 
-        console.log(todoItem);
 
-        closeDialog(todoEditDialog);
+      console.log(todoItem);
 
-        displayTodos(selectedProject);
-        todoEditNameInput.value = '';
+      closeDialog(todoEditDialog);
+      displayTodos(choosedProject);
+      saveProjects();
 
-        console.log({ todoItem});
-    }
-    else return;
-})
+      todoEditNameInput.value = "";
+      todoEditDateInput.value = new Date();
+      todoEditDescInput.value = "";
+
+      if (radioSelectedId !== null) document.querySelector(radioEditSelectedId).checked = false;
+
+      console.log({ todoItem });
+    } else return;
+  });
 }

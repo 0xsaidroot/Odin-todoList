@@ -1,63 +1,125 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Odin-todoList</title>
-  </head>
-  <body>
-    <header id="header">Header</header>
-    <aside id="aside">
-      <button style="margin: 5px" id="newProjectBtn">Add Project</button>
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Odin-todoList</title>
+</head>
+
+<body>
+  <aside id="aside">
+    <h1 id="head">Projects</h1>
+    <div id="projectContainer">
       <ul id="projectList"></ul>
+      <button id="newProjectBtn">+ Project</button>
+    </div>
 
-      <dialog closedby="closerequest" id="newProjectDialogBox">
-        <form method="dialog">
-          <p>
-            <label for="title">Name :</label
-            ><input type="text" id="newProjectName" />
-          </p>
-          <div class="lower-btn">
+    <dialog closedby="closerequest" id="newProjectDialogBox">
+      <form method="dialog">
+        <h1>New Project</h1>
+        <p>
+          <label for="newProjectName">Name :</label><input type="text" id="newProjectName" required/>
+        </p>
+        <div>
+          <label for="desc">Project Description :</label> <br>
+          <textarea id="desc" rows="10" style="width: 100%; resize: none;"
+            placeholder="my Awesome Project..."></textarea>
+        </div>
+        <div class="lower-proj">
+          <div class="lower">
             <button type="button" class="cancelBtn">Cancel</button>
             <button type="submit" id="addBtn">Add</button>
           </div>
-        </form>
-      </dialog>
+        </div>
+      </form>
+    </dialog>
 
-      <dialog closedby="closerequest" id="editProjectDialogBox">
-        <form method="dialog">
-          <p>
-            <label for="title">Name :</label
-            ><input type="text" id="projectNameEdit" />
-          </p>
+    <dialog closedby="closerequest" id="editProjectDialogBox">
+      <form method="dialog">
+        <h1>Edit Project</h1>
+        <p>
+          <label for="projectNameEdit">Name :</label><input type="text" id="projectNameEdit" />
+        </p>
+        <div>
+          <label for="descEdit">Project Description :</label> <br>
+          <textarea id="descEdit" rows="10" style="width: 100%; resize: none;"></textarea>
+        </div>
+        <div class="lower-proj">
           <button type="button" class="cancelBtn">Cancel</button>
           <button type="submit" id="editBtn">Edit</button>
-        </form>
-      </dialog>
-    </aside>
-    <main id="main">
-      <button id="addTaskBtn">Add Task</button>
-
-      <dialog closedby="closerequest" id="TodoDialog">
-        <form method="dialog">
-          <p>
-            <label for="title">Name :</label><input type="text" id="todoName" />
-          </p>
+        </div>
+      </form>
+    </dialog>
+  </aside>
+  <main id="main">
+    <div id="Header">
+      <p id="headerName"></p>
+      <div id="headerBotttom">
+        <p id="headerDesc"></p>
+        <button id="addTaskBtn">+Add Task</button>
+      </div>
+    </div>
+    
+    <dialog closedby="closerequest" id="TodoDialog">
+      <form method="dialog">
+        <h1>New Task</h1>
+        <p>
+          <label for="todoName">Name :</label><input type="text" id="todoName" required/>
+        </p>
+        <div>
+          <label for="todoDesc">Desc :</label> <textarea id="todoDesc" rows="5" style="width: 100%; resize: none;"
+            placeholder="Tasking..."></textarea>
+        </div>
+        <p>
+          <label for="todoDate">dueDate :</label><input type="date" id="todoDate" required>
+        </p>
+        <div class="priorityDiv">
+          <span>Priority :</span>
+          <div class="priorityRadios">
+            <span><input type="radio" name="Priority" id="prior1" value="Low"><label for="prior1">Low</label></span>
+            <span><input type="radio" name="Priority" id="prior2" value="Medium"><label
+                for="prior2">Medium</label></span>
+            <span><input type="radio" name="Priority" id="prior3" value="High"><label for="prior3">High</label></span>
+          </div>
+        </div>
+        <div class="lower-proj">
           <button type="button" class="cancelBtn">Cancel</button>
           <button type="submit" id="addTodoBtn">Add</button>
-        </form>
-      </dialog>
-
-      <dialog closedby="closerequest" id="TodoEditDialog">
-        <form method="dialog">
-          <p>
-            <label for="title">Name :</label><input type="text" id="todoNameEditInput" />
-          </p>
+        </div>
+      </form>
+    </dialog>
+    <dialog closedby="closerequest" id="TodoEditDialog">
+      <form method="dialog">
+        <h1>Edit Task</h1>
+        <p>
+          <label for="todoNameEditInput">Name :</label><input type="text" id="todoNameEditInput" />
+        </p>
+        <div>
+          <label for="todoDescEdit">Desc :</label> <textarea id="todoDescEdit" rows="5"
+            style="width: 100%; resize: none;" placeholder="Tasking..."></textarea>
+        </div>
+        <p>
+          <label for="todoDateEdit">dueDate :</label><input type="date" id="todoDateEdit">
+        </p>
+        <div class="priorityDiv">
+          <span>Priority :</span>
+          <div class="priorityEditRadios">
+            <span><input type="radio" name="Priority" id="prior1Edit" value="Low"><label
+                for="prior1Edit">Low</label></span>
+            <span><input type="radio" name="Priority" id="prior2Edit" value="Medium"><label
+                for="prior2Edit">Medium</label></span>
+            <span><input type="radio" name="Priority" id="prior3Edit" value="High"><label
+                for="prior3Edit">High</label></span>
+          </div>
+        </div>
+        <div class="lower-proj">
           <button type="button" class="cancelBtn">Cancel</button>
           <button type="submit" id="todoEditBtn">Edit</button>
-        </form>
-      </dialog>
-    </main>
-  </body>
+        </div>
+      </form>
+    </dialog>
+  </main>
+</body>
+
 </html>

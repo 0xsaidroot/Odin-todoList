@@ -2,25 +2,251 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-}  
-body{
+}
+
+:root {
+    --aside-bg-color: #80ed99;
+    --main-bg-color: #c7f9cc;
+    --underline-color: #38a3a5;
+    --desc-color: #01634a;
+    --todoItem-color: #83da8c;
+    --selected-color: #588157;
+    --hover-color:#57cc99;
+}
+
+body {
     height: 100vh;
     display: grid;
-    grid-template-columns: min(30%,300px)  1fr;
-    grid-template-rows: min(75px,15%) 1fr;
+    grid-template-columns: min(45%, 400px) 1fr;
+    grid-template-rows: 1fr;
+}
+
+aside {
+    background-color: var(--aside-bg-color);
+    padding: 5rem 2rem;
 
 }
-header{
-    background-color: aqua;
-    grid-column: 1/3;
+
+aside #head {
+    position: relative;
+    margin-bottom: 2rem;
+    font-size: 3em;
 }
-aside{
-    background-color: blue;
-    grid-row: 2/3;
+
+aside #head::after {
+    content: '';
+    height: .1em;
+    width: 100%;
+    background-color: var(--underline-color);
+    position: absolute;
+    bottom: -10px;
+    left: 0;
 
 }
-main{
-    background-color: coral;
-    grid-column: 2/3;
-    grid-row: 2/3;
-} 
+
+main {
+    background-color: var(--main-bg-color);
+}
+input[type="checkbox"]:checked + label {
+ text-decoration: line-through;
+}
+main #addTaskBtn {
+    font-size: 1.3rem;
+    padding: 15px;
+    width: 50%;
+    border-radius: 20px;
+    justify-self: center;
+    align-self: flex-start;
+}
+
+#projectContainer {
+    position: relative;
+}
+
+#projectContainer #newProjectBtn {
+    position: absolute;
+    font-size: 1rem;
+    padding: 5px;
+    border-radius: 20px;
+    right: 0;
+    bottom: -70px;
+}
+
+#projectList li {
+    display: grid;
+    grid-template-columns: 1fr 20% 20%;
+    gap: 1rem;
+}
+
+#projectList li:hover{
+    background-color: var(--hover-color);
+    padding: 5px 5px 5px 0;
+    border-radius: 10px;
+}
+.takenProject {
+    background-color: var(--selected-color);
+    padding: 5px 5px 5px 0;
+    border-radius: 10px;
+}
+
+#projectList li button {
+    border-radius: 20px;
+}
+
+#projectList {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    height: 100%;
+    gap: 1rem;
+    font-size: 2rem;
+}
+
+dialog {
+    width: min(50%, 600px);
+    height: 500px;
+    border-radius: 10px;
+    place-self: center;
+}
+
+dialog::backdrop {
+    opacity: .75;
+    background-color: gray;
+}
+
+form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 3rem 2rem;
+}
+
+form p {
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto 1fr;
+    font-size: 1.6rem;
+    gap: 1em;
+
+    input {
+        font-size: 1rem;
+    }
+}
+
+form .lower-proj {
+    margin-top: auto;
+    text-align: center;
+}
+
+.lower-proj button {
+    padding: .5rem;
+    border-radius: 30%;
+    font-size: 2rem;
+    margin-right: 10px;
+}
+
+textarea {
+    padding: 5px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.priorityDiv {
+    display: grid;
+    font-size: 20px;
+    gap: 20px;
+    grid-template-columns: auto 1fr;
+}
+
+.priorityRadios {
+
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+
+}
+
+.todoContainer {
+    list-style-type: none;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 1rem 6rem 3rem 3rem;
+}
+
+.todoItem {
+    background-color: var(--aside-bg-color);
+    display: grid;
+    font-size: 1rem;
+    grid-template-columns: 1fr 25%;
+    border-radius: 10%;
+}
+
+.todoItem div:first-child {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+
+    input[type="checkBox"] {
+        margin: 0px 10px;
+        transform: scale(1.5);
+    }
+}
+
+.todoItem div:nth-child(2) {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1em;
+
+    button {
+        border-radius: 25px;
+        padding: 10px;
+    }
+}
+
+.todoItem div:nth-child(3) {
+    font-size: 1.2rem;
+    margin-left: 30px;
+    color: var(--desc-color);
+
+}
+
+.todoItem div:nth-child(4) {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 3px;
+}
+
+#Header {
+    padding: 1rem;
+    position: relative;
+}
+
+#headerName {
+    font-size: 3rem;
+}
+
+#headerBotttom {
+    display: grid;
+    grid-template-columns: 1fr 30%;
+
+    p {
+        color: var(--desc-color);
+        font-size: 1.2rem;
+    }
+}
+
+#Header::after {
+    content: '';
+    height: .2em;
+    width: 100%;
+    background-color: var(--underline-color);
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    margin-bottom: 10px;
+}

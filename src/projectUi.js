@@ -1,9 +1,9 @@
 import { Project, saveProject, deleteProject } from "./project.js";
-import { openDialog, closeDialog, projects } from "./script.js";
+import { openDialog, closeDialog, projects, saveProjects } from "./script.js";
 import { displayTodos } from "./todoUi.js";
 
 
-export const todoList = document.createElement('ul');
+export const todoList = document.createElement('div');
 
 export let selectedProject;
 
@@ -11,15 +11,14 @@ const newProjectDialog = document.querySelector('#newProjectDialogBox');
 const editProjectDialog = document.querySelector('#editProjectDialogBox');
 const projectList = document.querySelector('#projectList')
 const newProjectName = document.querySelector('#newProjectName');
+const newProjectDesc = document.querySelector('#desc');
 const editProjectName = document.querySelector('#projectNameEdit');
-
-const aside = document.querySelector('aside');
-
-
+const editProjectDesc = document.querySelector('#descEdit');
+const aside = document.querySelector('#projectContainer');
 
 export function displayProjects(projects) {
 
-    projectList.innerHTML = '';
+    projectList.replaceChildren();
 
 
     for (const project of projects) {
@@ -47,10 +46,7 @@ export function displayTodosOnClick(projects) {
         let projectItem = projects.find(item => item.id === target);
 
         selectedProject = projectItem;
-
         if (!projectItem) return;
-
-        todoList.replaceChildren();
         displayTodos(projectItem);
     })
 }
@@ -70,17 +66,29 @@ export function addNewProject() {
     newProjectDialog.addEventListener('click', function (event) {
         let target = event.target;
 
-        if (target.className === "cancelBtn") closeDialog(newProjectDialog);
-        else if (target.id === "addBtn") {
-            const newProject = new Project(newProjectName.value);
+        if (target.className === "cancelBtn"){ closeDialog(newProjectDialog);
             newProjectName.value = '';
+            newProjectDesc.value = '';
+        }
+        else if (target.id === "addBtn") {
+            if (!newProjectName.value.trim()) {
+                alert("Please enter a project name.");
+                return;
+            }
+
+            const newProject = new Project(newProjectName.value);
+            newProject.desc = newProjectDesc.value;
+            newProjectName.value = '';
+            newProjectDesc.value = '';
 
             openDialog(newProjectDialog);
             saveProject(newProject, projects);
             displayProjects(projects);
+            saveProjects();
         }
         else return;
     })
+    console.log(projects);
 }
 export function editAndClearProject() {
     projectList.addEventListener('click', (event) => {
@@ -99,15 +107,22 @@ export function editAndClearProject() {
 
             editProjectDialog.dataset.editingId = projectItem.id;
             editProjectName.value = projectItem.name;
+            editProjectDesc.value = projectItem.desc;
 
 
         } else if (target.className === 'clearBtn') {
             let item = target.closest("li");
             if (!item) return;
-            deleteProject(item, projects);
-            console.log(projects);
-            displayProjects(projects);
+            const projectItem = projects.find(obj => obj.id === item.id);
+            if (!projectItem) return;
+            deleteProject(projectItem, projects);
 
+            displayTodos(projects[0]);
+
+            displayProjects(projects);
+            saveProjects();
+            editProjectName.value = '';
+            editProjectDesc.value = '';
         } else return;
     })
     editProjectDialog.addEventListener('click', function (event) {
@@ -115,15 +130,24 @@ export function editAndClearProject() {
 
         if (target.className === "cancelBtn") closeDialog(editProjectDialog);
         else if (target.id === "editBtn") {
+            // Validation
+            if (!editProjectName.value.trim()) {
+                alert("Please enter a project name.");
+                return;
+            }
+
             const editingItem = projects.find(item => item.id === editProjectDialog.dataset.editingId);
             if (!editingItem) return;
             console.log(editingItem);
 
             editingItem.name = editProjectName.value;
+            editingItem.desc = editProjectDesc.value;
 
             closeDialog(editProjectDialog);
 
             displayProjects(projects);
+            displayTodos(editingItem);
+            saveProjects();
             editProjectName.value = '';
 
             console.log({ editingItem });
