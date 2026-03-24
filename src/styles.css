@@ -83,12 +83,6 @@ main #addTaskBtn {
     padding: 5px 5px 5px 0;
     border-radius: 10px;
 }
-.takenProject {
-    background-color: var(--selected-color);
-    padding: 5px 5px 5px 0;
-    border-radius: 10px;
-}
-
 #projectList li button {
     border-radius: 20px;
 }
