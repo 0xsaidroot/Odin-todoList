@@ -218,7 +218,7 @@ export function editAndClearTodos() {
       } else PriorEdit = "#prior1Edit";
       document.querySelector(PriorEdit).checked = true;
 
-    }else return;
+    } else return;
   });
   todoEditDialog.addEventListener("click", function (event) {
 
@@ -226,42 +226,39 @@ export function editAndClearTodos() {
 
     if (target.className === "cancelBtn") closeDialog(todoEditDialog);
     else if (target.id === "todoEditBtn") {
-      // Validation
       if (!todoEditNameInput.value.trim()) {
         alert("Please enter a task name.");
         return;
-      }
-      if (!selectedEditPriority) {
+      } if (!selectedEditPriority) {
         alert("Please select a priority.");
-        return;
-      }
+      } 
+        console.log("clicked Edit");
 
-      console.log("clicked Edit");
+        let todoItem = choosedProject.todoArray.find((obj) => obj.id === todoEditDialog.dataset.editingId);
+        if (!todoItem) return;
 
-      let todoItem = choosedProject.todoArray.find((obj) => obj.id === todoEditDialog.dataset.editingId);
-      if (!todoItem) return;
+        console.log(todoItem);
 
-      console.log(todoItem);
-
-      todoItem.title = todoEditNameInput.value;
-      todoItem.dueDate = todoEditDateInput.value;
-      todoItem.description = todoEditDescInput.value;
-      todoItem.priority = selectedEditPriority;
+        todoItem.title = todoEditNameInput.value;
+        todoItem.dueDate = todoEditDateInput.value;
+        todoItem.description = todoEditDescInput.value;
+        todoItem.priority = selectedEditPriority;
 
 
-      console.log(todoItem);
+        console.log(todoItem);
 
-      closeDialog(todoEditDialog);
-      displayTodos(choosedProject);
-      saveProjects();
+        closeDialog(todoEditDialog);
+        displayTodos(choosedProject);
+        saveProjects();
 
-      todoEditNameInput.value = "";
-      todoEditDateInput.value = new Date();
-      todoEditDescInput.value = "";
+        todoEditNameInput.value = "";
+        todoEditDateInput.value = new Date();
+        todoEditDescInput.value = "";
 
-      if (radioSelectedId !== null) document.querySelector(radioEditSelectedId).checked = false;
+        if (radioSelectedId !== null) document.querySelector(radioEditSelectedId).checked = false;
 
-      console.log({ todoItem });
+        console.log({ todoItem });
+
     } else return;
   });
 }

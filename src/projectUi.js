@@ -34,6 +34,7 @@ export function displayProjects(projects) {
         clearItem.className = 'clearBtn';
         projectItem.textContent = project.name;
 
+
         projectItem.append(editItem, clearItem);
         projectList.append(projectItem);
     }
@@ -47,6 +48,7 @@ export function displayTodosOnClick(projects) {
 
         selectedProject = projectItem;
         if (!projectItem) return;
+
         displayTodos(projectItem);
     })
 }
@@ -66,7 +68,8 @@ export function addNewProject() {
     newProjectDialog.addEventListener('click', function (event) {
         let target = event.target;
 
-        if (target.className === "cancelBtn"){ closeDialog(newProjectDialog);
+        if (target.className === "cancelBtn") {
+            closeDialog(newProjectDialog);
             newProjectName.value = '';
             newProjectDesc.value = '';
         }
@@ -74,19 +77,16 @@ export function addNewProject() {
             if (!newProjectName.value.trim()) {
                 alert("Please enter a project name.");
                 return;
-            }
+            } 
+                const newProject = new Project(newProjectName.value);
+                newProject.desc = newProjectDesc.value;
+                newProjectName.value = '';
+                newProjectDesc.value = '';
 
-            const newProject = new Project(newProjectName.value);
-            newProject.desc = newProjectDesc.value;
-            newProjectName.value = '';
-            newProjectDesc.value = '';
-
-            openDialog(newProjectDialog);
-            saveProject(newProject, projects);
-            displayProjects(projects);
-            saveProjects();
-        }
-        else return;
+                closeDialog(newProjectDialog);
+                saveProject(newProject, projects);
+                displayProjects(projects)
+            }else return;
     })
     console.log(projects);
 }
